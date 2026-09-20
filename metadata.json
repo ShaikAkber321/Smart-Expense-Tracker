@@ -1,0 +1,6 @@
+{
+  "name": "Smart Expense Tracker with Predictive Insights",
+  "description": "Production-grade personal finance application with time-series expense forecasting, Chart.js analytics, and OpenAI-powered saving recommendations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

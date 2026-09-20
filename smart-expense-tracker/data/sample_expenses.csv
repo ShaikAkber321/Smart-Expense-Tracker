@@ -1,0 +1,115 @@
+title,amount,category,expense_date,payment_method,description
+Monthly Apartment Rent,22000.00,Rent,2025-11-01,Bank Transfer,Monthly flat rent payment
+Supermarket Groceries,4250.00,Groceries,2025-11-03,UPI,Weekly staples and pantry refill
+High Speed Fiber Internet,1299.00,Bills,2025-11-04,Credit Card,Airtel broadband bill
+Electricity & Water Bill,2850.00,Utilities,2025-11-05,UPI,State electricity board bill
+Office Metro Pass Recharge,1200.00,Travel,2025-11-06,Debit Card,Monthly transit card top-up
+Dinner with Colleagues,1850.00,Food,2025-11-08,Credit Card,Friday team dinner at Olive Bistro
+Pharmacy Prescription Medicines,840.00,Healthcare,2025-11-10,UPI,Vitamins and cold prescription
+Weekend Movie & Popcorn,950.00,Entertainment,2025-11-14,UPI,PVR cinema weekend tickets
+Mid-month Organic Groceries,3100.00,Groceries,2025-11-16,Credit Card,Fresh produce and dairy
+Winter Jacket & Casual Shirts,4500.00,Shopping,2025-11-19,Credit Card,Winter apparel purchase
+Uber Airport Ride,780.00,Travel,2025-11-22,UPI,Cab ride to airport
+Online AI Specialization Course,2499.00,Education,2025-11-25,Credit Card,Deep learning certification
+Monthly Apartment Rent,22000.00,Rent,2025-12-01,Bank Transfer,Monthly apartment rental
+Fiber Internet Renewal,1299.00,Bills,2025-12-03,Credit Card,Broadband bill
+Weekly Supermarket Shopping,4600.00,Groceries,2025-12-05,Debit Card,Monthly essentials
+Electricity Utility Bill,2400.00,Utilities,2025-12-06,UPI,Winter electricity bill
+Holiday Gift Shopping,5800.00,Shopping,2025-12-12,Credit Card,Year-end gifts and souvenirs
+Dinner & Drinks Celebration,2400.00,Food,2025-12-15,UPI,Celebration dinner
+Fuel Refill for Vehicle,2200.00,Travel,2025-12-18,Credit Card,Petrol station refill
+Weekend Grocery Refill,3400.00,Groceries,2025-12-21,UPI,Vegetables and fruits
+Concert Ticket Event,1800.00,Entertainment,2025-12-24,Debit Card,Music festival entry
+Dental Checkup & Cleaning,1500.00,Healthcare,2025-12-27,Cash,Annual dental inspection
+Year-End Gathering Dinner,3200.00,Food,2025-12-31,Credit Card,New year eve party dinner
+Monthly Apartment Rent,22000.00,Rent,2026-01-01,Bank Transfer,Rent transfer to landlord
+Groceries & Essentials,4400.00,Groceries,2026-01-04,UPI,New year pantry restock
+Broadband Internet,1299.00,Bills,2026-01-05,Credit Card,Monthly internet bill
+Electricity Bill,2100.00,Utilities,2026-01-06,UPI,Electricity bill
+Tech Books and Kindle Guides,1150.00,Education,2026-01-09,Credit Card,Data science reference books
+Commute Train Ticket,1400.00,Travel,2026-01-12,Debit Card,Monthly train pass
+Casual Dining with Friends,1650.00,Food,2026-01-16,UPI,Weekend café brunch
+Mid-month Groceries,3800.00,Groceries,2026-01-19,UPI,Fresh market supplies
+Fitness Gym Membership,2500.00,Healthcare,2026-01-22,UPI,Quarterly gym renewal
+Running Shoes Purchase,3600.00,Shopping,2026-01-25,Credit Card,Sports running footwear
+Mobile Postpaid Bill,799.00,Bills,2026-01-28,UPI,Cellular postpaid recharge
+Monthly Apartment Rent,22000.00,Rent,2026-02-01,Bank Transfer,Monthly flat rent
+Groceries & Supplies,4800.00,Groceries,2026-02-03,Credit Card,Supermarket purchase
+Fiber Broadband Bill,1299.00,Bills,2026-02-04,Credit Card,Monthly fiber bill
+Electricity Consumption Bill,2350.00,Utilities,2026-02-06,UPI,Power bill
+Weekend Outstation Trip Fuel,3500.00,Travel,2026-02-10,Debit Card,Highway toll & fuel
+Fine Dining Valentine Dinner,3400.00,Food,2026-02-14,Credit Card,Special dinner
+Weekly Groceries,3200.00,Groceries,2026-02-17,UPI,Pantry refill
+Streaming Subscriptions,899.00,Entertainment,2026-02-20,Credit Card,Netflix and Spotify bundles
+Eye Examination & Lenses,2200.00,Healthcare,2026-02-23,UPI,Vision test and lens upgrade
+Casual Apparel & Shoes,2900.00,Shopping,2026-02-26,Credit Card,Weekend sale apparel
+Monthly Apartment Rent,22000.00,Rent,2026-03-01,Bank Transfer,Monthly flat rent
+Supermarket Cart Items,5100.00,Groceries,2026-03-04,UPI,Monthly household inventory
+Electricity Bill,2700.00,Utilities,2026-03-05,UPI,Electricity billing
+Fiber Optic Internet,1299.00,Bills,2026-03-06,Credit Card,Broadband plan
+Metro Train Smart Card,1300.00,Travel,2026-03-09,UPI,Commuter balance
+Cloud Computing Lab Subscription,1650.00,Education,2026-03-12,Credit Card,AWS/GCP learning lab credits
+Dinner Outing,2100.00,Food,2026-03-15,Credit Card,Family restaurant dinner
+Mid-month Organic Market,3600.00,Groceries,2026-03-18,Debit Card,Fresh farm produce
+Home Decor & Kitchenware,4200.00,Shopping,2026-03-22,Credit Card,Kitchen appliances and lighting
+Amusement Park Tickets,1750.00,Entertainment,2026-03-26,UPI,Weekend outing entry passes
+Postpaid Mobile Plan,799.00,Bills,2026-03-29,UPI,Monthly phone bill
+Monthly Apartment Rent,22000.00,Rent,2026-04-01,Bank Transfer,Monthly flat rent
+Pantry Restock Groceries,4900.00,Groceries,2026-04-03,UPI,Wholesale pantry goods
+Electricity & Cooling Bill,3400.00,Utilities,2026-04-05,UPI,Higher summer electricity usage
+Fiber Internet Recharge,1299.00,Bills,2026-04-06,Credit Card,Home internet
+Cab Rides and Transit,1600.00,Travel,2026-04-10,UPI,Work commute rides
+Weekend Food Delivery,1450.00,Food,2026-04-13,UPI,Swiggy weekend delivery
+Ergonomic Chair Upgrade,6800.00,Shopping,2026-04-17,Credit Card,Work from home chair
+Specialist Doctor Consultation,1200.00,Healthcare,2026-04-20,Cash,Physician checkup
+Fresh Market Vegetables,3300.00,Groceries,2026-04-23,UPI,Weekly market trip
+Gaming & Entertainment Pass,1499.00,Entertainment,2026-04-27,Credit Card,PlayStation network pass
+Monthly Apartment Rent,22000.00,Rent,2026-05-01,Bank Transfer,Rent payment
+Supermarket Groceries,5300.00,Groceries,2026-05-03,Debit Card,Monthly grocery supplies
+Summer AC Electricity Bill,3900.00,Utilities,2026-05-05,UPI,Peak summer power bill
+Fiber Broadband,1299.00,Bills,2026-05-06,Credit Card,Internet subscription
+Train Pass Recharge,1300.00,Travel,2026-05-09,UPI,Transit card
+Team Lunch Buffet,2600.00,Food,2026-05-13,Credit Card,Colleague luncheon
+Online Tech Workshop,1999.00,Education,2026-05-17,Credit Card,React and FastAPI seminar
+Weekly Grocery Refill,3500.00,Groceries,2026-05-20,UPI,Daily essentials
+Summer Wardrobe Clothing,4100.00,Shopping,2026-05-24,Credit Card,Cotton shirts and trousers
+Board Game Café Night,1100.00,Entertainment,2026-05-28,UPI,Café games & snacks
+Monthly Apartment Rent,22000.00,Rent,2026-06-01,Bank Transfer,Rent payment
+Grocery Supplies & Household,5200.00,Groceries,2026-06-03,UPI,Supermarket essentials
+Electricity Bill,3800.00,Utilities,2026-06-05,UPI,Summer cooling bill
+High Speed Internet,1299.00,Bills,2026-06-06,Credit Card,Broadband
+Commuter Fuel & Metro,2100.00,Travel,2026-06-10,Debit Card,Transportation costs
+Café Working Sessions,1650.00,Food,2026-06-14,UPI,Espresso and food
+Weekend Groceries,3700.00,Groceries,2026-06-18,UPI,Provisions
+Noise Cancelling Headphones,7500.00,Shopping,2026-06-22,Credit Card,Sony headphones purchase
+Cinema IMAX Tickets,1350.00,Entertainment,2026-06-25,Credit Card,IMAX movie night
+Blood Work Health Panel,1800.00,Healthcare,2026-06-28,UPI,Annual health laboratory tests
+Monthly Apartment Rent,22000.00,Rent,2026-07-01,Bank Transfer,Monthly flat rent
+Groceries & Produce,5400.00,Groceries,2026-07-03,UPI,Monthly essentials
+Electricity Bill,3200.00,Utilities,2026-07-05,UPI,Monsoon electricity
+Broadband Internet Bill,1299.00,Bills,2026-07-06,Credit Card,Broadband connection
+Transit Card Refill,1300.00,Travel,2026-07-09,UPI,Metro transit balance
+Monsoon Weekend Dinner,2400.00,Food,2026-07-13,Credit Card,Dining out
+Fresh Market Groceries,3600.00,Groceries,2026-07-18,Debit Card,Weekly market groceries
+Raincoat & Umbrella Gear,2100.00,Shopping,2026-07-21,UPI,Monsoon apparel
+Machine Learning Book,1450.00,Education,2026-07-25,Credit Card,Python ML textbook
+Movie Tickets & Snacks,1150.00,Entertainment,2026-07-29,UPI,Weekend show
+Monthly Apartment Rent,22000.00,Rent,2026-08-01,Bank Transfer,Flat rental
+Supermarket Monthly Run,5600.00,Groceries,2026-08-03,Credit Card,Monthly grocery haul
+Electricity Bill,2900.00,Utilities,2026-08-05,UPI,Utility bill
+High Speed Fiber,1299.00,Bills,2026-08-06,Credit Card,Airtel broadband
+Long Weekend Road Trip Fuel,4200.00,Travel,2026-08-15,Debit Card,Independence Day road trip
+Highway Restaurant Lunches,2750.00,Food,2026-08-16,UPI,Road trip meals
+Mid-month Groceries,3400.00,Groceries,2026-08-20,UPI,Dairy and provisions
+Festival Gift Purchases,4800.00,Shopping,2026-08-23,Credit Card,Festive season shopping
+Physiotherapy Session,1500.00,Healthcare,2026-08-27,Cash,Back posture session
+Mobile Postpaid Bill,799.00,Bills,2026-08-30,UPI,Cellular plan
+Monthly Apartment Rent,22000.00,Rent,2026-09-01,Bank Transfer,Rent payment
+Grocery Supplies,5500.00,Groceries,2026-09-03,UPI,Supermarket essentials
+Electricity Bill,2600.00,Utilities,2026-09-05,UPI,Utility payment
+Broadband Internet,1299.00,Bills,2026-09-06,Credit Card,Home internet
+Metro Pass & Cabs,1700.00,Travel,2026-09-09,UPI,Daily travel
+Weekend Restaurant Dinner,2300.00,Food,2026-09-12,Credit Card,Italian bistro dinner
+Weekly Vegetables & Provisions,3500.00,Groceries,2026-09-16,UPI,Farmers market groceries
+Autumn Wardrobe Sale,3800.00,Shopping,2026-09-18,Credit Card,Clothing and shoes
+Streaming Services Bundle,899.00,Entertainment,2026-09-19,Credit Card,Digital entertainment

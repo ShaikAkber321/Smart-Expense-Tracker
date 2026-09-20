@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics - Smart Expense Tracker{% endblock %}
+{% block header_title %}Analytics Engine{% endblock %}
+{% block header_subtitle %}Descriptive statistical metrics computed across historical records{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-7xl mx-auto">
+    <!-- Statistical Summary Row -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div class="bg-white p-4 rounded-xl border border-slate-200/80">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">TOTAL SPENT</span>
+            <div id="statTotal" class="text-lg font-bold font-display text-slate-900 mt-1">₹0.00</div>
+            <span class="text-[11px] text-slate-400" id="statTxnCount">0 records</span>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200/80">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">AVERAGE</span>
+            <div id="statAvg" class="text-lg font-bold font-display text-slate-900 mt-1">₹0.00</div>
+            <span class="text-[11px] text-slate-400">Mean expense</span>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200/80">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">MEDIAN</span>
+            <div id="statMedian" class="text-lg font-bold font-display text-slate-900 mt-1">₹0.00</div>
+            <span class="text-[11px] text-slate-400">50th percentile</span>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200/80">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">MAXIMUM</span>
+            <div id="statMax" class="text-lg font-bold font-display text-rose-600 mt-1">₹0.00</div>
+            <span class="text-[11px] text-slate-400">Highest ticket</span>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200/80">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">MINIMUM</span>
+            <div id="statMin" class="text-lg font-bold font-display text-emerald-600 mt-1">₹0.00</div>
+            <span class="text-[11px] text-slate-400">Lowest ticket</span>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-slate-200/80">
+            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">TOP CATEGORY</span>
+            <div id="statTopCat" class="text-lg font-bold font-display text-indigo-600 mt-1 truncate">N/A</div>
+            <span class="text-[11px] text-slate-400">Highest volume</span>
+        </div>
+    </div>
+
+    <!-- Category Breakdown Table & Charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Category Breakdown Table -->
+        <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+                <div>
+                    <h3 class="font-bold text-slate-900 text-sm">Category Expenditure Matrix</h3>
+                    <p class="text-xs text-slate-400">Total spending and percentage distribution</p>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-600">
+                    <thead class="bg-slate-50 text-xs font-semibold text-slate-500 uppercase">
+                        <tr>
+                            <th class="px-5 py-3">Category</th>
+                            <th class="px-5 py-3 text-right">Transactions</th>
+                            <th class="px-5 py-3 text-right">Total (₹)</th>
+                            <th class="px-5 py-3 text-right">Share (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categoryAnalyticsBody" class="divide-y divide-slate-100">
+                        <tr><td colspan="4" class="p-4 text-center text-slate-400">Loading data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Largest Transactions Card -->
+        <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs p-5">
+            <h3 class="font-bold text-slate-900 text-sm mb-1">Top High-Value Outliers</h3>
+            <p class="text-xs text-slate-400 mb-4">Largest recorded single transactions</p>
+            <div id="largestTxnsContainer" class="space-y-3">
+                <p class="text-xs text-slate-400">Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monthly Totals History & Day of Week -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Monthly History -->
+        <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs p-5">
+            <h3 class="font-bold text-slate-900 text-sm mb-1">Monthly Historical Aggregates</h3>
+            <p class="text-xs text-slate-400 mb-4">Grouped sums by billing period</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-xs text-slate-500 font-semibold">
+                        <tr>
+                            <th class="px-4 py-2.5 text-left">Period</th>
+                            <th class="px-4 py-2.5 text-right">Count</th>
+                            <th class="px-4 py-2.5 text-right">Total Amount (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthlyHistoryBody" class="divide-y divide-slate-100"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Day of Week Distribution -->
+        <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs p-5">
+            <h3 class="font-bold text-slate-900 text-sm mb-1">Daily Average Spending Profile</h3>
+            <p class="text-xs text-slate-400 mb-4">Behavioral weekday pattern analysis</p>
+            <div id="dowContainer" class="space-y-2.5"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    async function loadAnalytics() {
+        try {
+            const res = await fetch('/api/analytics');
+            const json = await res.json();
+            if (!json.success) return;
+
+            const d = json.data;
+            document.getElementById('statTotal').innerText = `₹${d.total_expenses.toLocaleString('en-IN')}`;
+            document.getElementById('statTxnCount').innerText = `${d.total_transactions} transactions`;
+            document.getElementById('statAvg').innerText = `₹${d.average_expense.toLocaleString('en-IN')}`;
+            document.getElementById('statMedian').innerText = `₹${d.median_expense.toLocaleString('en-IN')}`;
+            document.getElementById('statMax').innerText = `₹${d.maximum_expense.toLocaleString('en-IN')}`;
+            document.getElementById('statMin').innerText = `₹${d.minimum_expense.toLocaleString('en-IN')}`;
+            document.getElementById('statTopCat').innerText = d.most_expensive_category;
+
+            // Categories Table
+            const catBody = document.getElementById('categoryAnalyticsBody');
+            catBody.innerHTML = d.category_breakdown.map(c => `
+                <tr class="hover:bg-slate-50">
+                    <td class="px-5 py-3 font-medium text-slate-900">${c.category}</td>
+                    <td class="px-5 py-3 text-right text-slate-500">${c.count}</td>
+                    <td class="px-5 py-3 text-right font-semibold text-slate-800">₹${c.total.toLocaleString('en-IN')}</td>
+                    <td class="px-5 py-3 text-right">
+                        <div class="flex items-center justify-end space-x-2">
+                            <span class="text-xs font-semibold text-indigo-600">${c.percentage}%</span>
+                            <div class="w-16 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-indigo-500 h-full rounded-full" style="width: ${c.percentage}%"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+
+            // Largest Transactions
+            const txnsCont = document.getElementById('largestTxnsContainer');
+            txnsCont.innerHTML = d.largest_transactions.map(t => `
+                <div class="flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50/50">
+                    <div>
+                        <div class="font-semibold text-slate-800 text-xs">${t.title}</div>
+                        <div class="text-[11px] text-slate-400">${t.category} • ${t.date}</div>
+                    </div>
+                    <div class="font-bold text-slate-900 text-sm">₹${t.amount.toLocaleString('en-IN')}</div>
+                </div>
+            `).join('');
+
+            // Monthly History
+            const monthBody = document.getElementById('monthlyHistoryBody');
+            monthBody.innerHTML = d.monthly_totals.map(m => `
+                <tr class="hover:bg-slate-50">
+                    <td class="px-4 py-2.5 font-medium text-slate-800">${m.month}</td>
+                    <td class="px-4 py-2.5 text-right text-slate-500">${m.count}</td>
+                    <td class="px-4 py-2.5 text-right font-bold text-slate-900">₹${m.total.toLocaleString('en-IN')}</td>
+                </tr>
+            `).join('');
+
+            // Day of Week Profile
+            const dowCont = document.getElementById('dowContainer');
+            const maxDow = Math.max(...Object.values(d.daily_averages_by_weekday), 1);
+            dowCont.innerHTML = Object.entries(d.daily_averages_by_weekday).map(([day, val]) => {
+                const pct = Math.round((val / maxDow) * 100);
+                return `
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="font-medium text-slate-700">${day}</span>
+                            <span class="font-bold text-slate-900">₹${val.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-indigo-600 h-full rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+        } catch (e) {
+            console.error('Analytics load failure', e);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', loadAnalytics);
+</script>
+{% endblock %}

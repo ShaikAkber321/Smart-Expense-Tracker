@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}Budget Management - Smart Expense Tracker{% endblock %}
+{% block header_title %}Budget Allocation & Limits{% endblock %}
+{% block header_subtitle %}Set monthly spending boundaries and track real-time consumption ceilings{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-7xl mx-auto">
+    <!-- Overall Budget Banner -->
+    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6 md:p-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Current Monthly Overview</span>
+                <h3 class="text-2xl font-bold font-display text-slate-900 mt-1">Master Monthly Allowance</h3>
+                <p class="text-xs text-slate-500 mt-1">Monitors entire household expenditure across all categories</p>
+            </div>
+            <div class="text-right">
+                <div class="text-xs text-slate-400">Total Spent This Month</div>
+                <div id="overallSpentText" class="text-2xl font-bold font-display text-slate-900">₹0.00</div>
+                <div id="overallLimitText" class="text-xs text-slate-500 mt-0.5">Budget: ₹0.00</div>
+            </div>
+        </div>
+
+        <!-- Master Progress Bar -->
+        <div class="space-y-2">
+            <div class="flex justify-between text-xs font-semibold">
+                <span id="overallStatusBadge" class="text-emerald-600">On Track</span>
+                <span id="overallPctText" class="text-slate-800">0% utilized</span>
+            </div>
+            <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden">
+                <div id="overallProgressBar" class="h-full bg-indigo-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-slate-400">
+                <span>0%</span>
+                <span>75% Warning</span>
+                <span>90% Critical</span>
+                <span>100% Exceeded</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Budgets Grid & Add Modal -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h3 class="font-bold text-slate-900 text-lg font-display">Category Specific Allocations</h3>
+            <p class="text-xs text-slate-500">Fine-grained spending controls for granular budgeting</p>
+        </div>
+        <button id="openBudgetModalBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold shadow-xs inline-flex items-center space-x-2">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Set Category Budget</span>
+        </button>
+    </div>
+
+    <!-- Category Budget Cards Container -->
+    <div id="budgetGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <p class="text-xs text-slate-400 col-span-3">Loading category budgets...</p>
+    </div>
+
+    <!-- Set Budget Modal -->
+    <div id="budgetModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-xs p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-slate-900 font-display text-lg">Set Budget Limit</h3>
+                <button id="closeBudgetModalBtn" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <form id="setBudgetForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Target Category</label>
+                    <select id="budgetCategorySelect" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg">
+                        <option value="Overall">Overall Master Budget</option>
+                        <option value="Food">Food</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Education">Education</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Monthly Limit (₹) *</label>
+                    <input type="number" step="100" min="100" id="budgetLimitInput" required placeholder="e.g. 10000" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg">
+                </div>
+                <div class="flex justify-end space-x-3 pt-3">
+                    <button type="button" id="cancelBudgetBtn" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
+                    <button type="submit" class="px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg">Save Budget</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const modal = document.getElementById('budgetModal');
+    const openBtn = document.getElementById('openBudgetModalBtn');
+    const closeBtn = document.getElementById('closeBudgetModalBtn');
+    const cancelBtn = document.getElementById('cancelBudgetBtn');
+    const form = document.getElementById('setBudgetForm');
+
+    openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    cancelBtn.addEventListener('click', () => modal.classList.add('hidden'));
+
+    async function loadBudgets() {
+        try {
+            const res = await fetch('/api/budget');
+            const json = await res.json();
+            if (!json.success) return;
+
+            const d = json.data;
+            const overallSpent = d.overall_spent;
+            const overallLimit = d.overall_limit;
+            const overallPct = Math.round((overallSpent / overallLimit) * 100);
+
+            document.getElementById('overallSpentText').innerText = `₹${overallSpent.toLocaleString('en-IN')}`;
+            document.getElementById('overallLimitText').innerText = `Budget: ₹${overallLimit.toLocaleString('en-IN')}`;
+            document.getElementById('overallPctText').innerText = `${overallPct}% utilized`;
+
+            const bar = document.getElementById('overallProgressBar');
+            bar.style.width = `${Math.min(100, overallPct)}%`;
+
+            const badge = document.getElementById('overallStatusBadge');
+            if (overallPct >= 100) {
+                bar.className = 'h-full bg-rose-600 rounded-full transition-all duration-500';
+                badge.className = 'text-rose-600 font-bold';
+                badge.innerText = '⚠ Budget Exceeded!';
+            } else if (overallPct >= 90) {
+                bar.className = 'h-full bg-amber-500 rounded-full transition-all duration-500';
+                badge.className = 'text-amber-600 font-bold';
+                badge.innerText = 'Critical Alert (>90%)';
+            } else if (overallPct >= 75) {
+                bar.className = 'h-full bg-yellow-500 rounded-full transition-all duration-500';
+                badge.className = 'text-yellow-600 font-bold';
+                badge.innerText = 'Caution (>75%)';
+            } else {
+                bar.className = 'h-full bg-indigo-600 rounded-full transition-all duration-500';
+                badge.className = 'text-emerald-600 font-bold';
+                badge.innerText = '✓ Safe / Under Limit';
+            }
+
+            // Render category cards
+            const grid = document.getElementById('budgetGrid');
+            const catBudgets = d.budgets.filter(b => b.category !== 'Overall');
+
+            if (catBudgets.length === 0) {
+                grid.innerHTML = '<p class="text-xs text-slate-400 col-span-3">No category-specific budgets defined yet. Click "Set Category Budget" to create one.</p>';
+                return;
+            }
+
+            grid.innerHTML = catBudgets.map(b => {
+                let color = 'bg-indigo-600';
+                let tag = 'text-emerald-600';
+                if (b.status === 'exceeded') {
+                    color = 'bg-rose-600';
+                    tag = 'text-rose-600 font-bold';
+                } else if (b.status === 'critical') {
+                    color = 'bg-amber-500';
+                    tag = 'text-amber-600 font-bold';
+                } else if (b.status === 'warning') {
+                    color = 'bg-yellow-500';
+                    tag = 'text-yellow-600 font-bold';
+                }
+
+                return `
+                    <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-xs space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-900 text-sm">${b.category}</span>
+                            <span class="text-xs ${tag}">${b.used_percentage}%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="h-full ${color} rounded-full" style="width: ${Math.min(100, b.used_percentage)}%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 pt-1">
+                            <span>Spent: <strong>₹${b.actual_spent.toLocaleString('en-IN')}</strong></span>
+                            <span>Limit: <strong>₹${b.monthly_limit.toLocaleString('en-IN')}</strong></span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+        } catch (e) {
+            console.error('Failed to load budgets', e);
+        }
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+            category: document.getElementById('budgetCategorySelect').value,
+            monthly_limit: parseFloat(document.getElementById('budgetLimitInput').value),
+            month: new Date().getMonth() + 1,
+            year: new Date().getFullYear(),
+        };
+
+        try {
+            const res = await fetch('/api/budget', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            if (res.ok) {
+                modal.classList.add('hidden');
+                loadBudgets();
+            }
+        } catch (err) {
+            alert('Failed to save budget: ' + err.message);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', loadBudgets);
+</script>
+{% endblock %}
